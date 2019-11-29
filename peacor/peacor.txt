@@ -1,0 +1,49 @@
+Version 0.1.0
+
+The program computes Pearson correlation coefficient matrix for a set of
+observations over multiple variates.
+
+Instalation:
+
+    The only prerequisite is the go environment, present in all Linux distros.
+    mkdir peacor
+    mv main.go peacor
+    cd peacor
+    go build
+    sudo mv peacor /usr/bin/
+
+Input:
+
+    single character separated file; default delimiter: tab, use -d flag to change
+    Fields:
+    	variableLabel, [observation ...]
+
+Output:
+
+    adjacency matrix (tab separated file)
+    Fields:
+    	variableLabel1, variableLabel2, correlation
+
+Usage:
+
+    peacor [flags] inFilePath outFilePath
+
+Flags:
+
+    -d string
+    	input file field delimiter, a single charater string, default: "\t"
+    -f
+    	output full matrix, default: no main diagonal elements
+    -a
+    	output absolute values
+    NB:
+    	flags shouldn't be combined into a single string
+
+Examples:
+
+    peacor -d=' '   var2obs.ssv var2obs.adj
+    	space separated input
+    peacor -a var2obs.tsv var2obs.adj
+    	output contains absolute values of correlation coefficients
+    peacor -f var2obs.tsv var2obs.adj
+    output includes the main diogonal of the matrix (var1:var1, var2:var2 ...)
