@@ -1,0 +1,42 @@
+### nodeview-0.1 ###
+
+## Function:
+provides basic node attributes such as degree, clustering coefficient, eigen vector centrality
+nodes are optionally filted by node weights
+
+## Input:
+adjacency matrix, white space delimited: varLabel1, varLabel2, edgeWeight
+
+## Output:
+tab delimited: nodeID, nodeWeight, nodeDegree, nodeClustering, nodeCentrality; STDOUT
+
+## Usage:
+./nodeview.py [-cdehv] [-p <float> | -w <float>] -i <string>
+# Options:
+-c: compute clustering
+-d: compute degree
+-e: compute eigen vector centrality
+-h: print help
+-i: input adjacency matrix
+-p: percent of top nodes to print: (0,100) exclusive
+-v: print version
+-w: node weight cutoff for printing: (0,1) exclusive
+# Examples:
+./nodeview.py -h
+./nodeview.py -cde -i adjacency.tsv
+./nodeview.py -cde -p 50 -i adjacency.tsv
+
+## Restrictions:
+'-c' requires all edge weights to be be non-negative
+'-p' and '-w' are mutually exclusive
+
+## Comments:
+- implemented to operate equally under Python 2 and Python 3
+- if one of the "-cde" options is omitted the corresponding values are not computed and set to 0.0 in the output
+- all node attributes are weighted
+- node weghts are computed as the mean of absolute values of adjoining edge weghts
+
+## Dependencies:
+networkx Python library
+> sudo pip install networkx
+

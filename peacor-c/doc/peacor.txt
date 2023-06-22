@@ -1,0 +1,50 @@
+### peacor-0.1 ###
+
+## Function:
+ computes Pearson correlation coefficient (PCC) matrix for a set of observations over multiple variates
+
+## Input:
+columns: varLabel, obs1, obs2, ...
+delimiter specified on the command line; default: tab or space
+
+## Output (STDOUT):
+adjacency matrix, tab delimited: varLabel1, varLabel2, PCC
+
+## Compilation:
+Normally any C compiler should do, tested with mpicc, clang, gcc 
+# Example:
+> clang -std=c11 -O3 -c peacor.c
+> clang peacor.o -lgsl -lgslcblas -lm -o peacor
+> rm peacor.o
+
+## Usage:
+./peacor [-afhv -d <string>] -r <int> -c <int> -i <sting>
+# Options:
+-a: export absolute values
+-f: export full matrix, default: no main diagonal
+-h: help
+-d: delimiter
+-r: number of rows
+-c: number of columns
+-i: input data file
+# Examples:
+./peacor -h
+./peacor -r 3 -c 5 -i var2obs.tsv
+./peacor -a -r 3 -c 5 -i var2obs.tsv
+
+## Restrictions:
+- no spaces within the fields in the input file
+- max lenth for strings: 64
+- max length for numbers: 16
+
+## Comments:
+
+## Dependencies:
+- GNU Scientific Library (GSL), present in all major Linux repositories.
+Arch:
+pacman -Sy gsl
+Ubuntu:
+apt install gsl-bin libgsl-dev
+Centos:
+dnf install gsl gsl-devel
+
